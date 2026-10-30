@@ -1,0 +1,28 @@
+{
+ "_doc": "UART pin selection patterns and SoC data. A pin is UART only when the workbook's SELECTED function says so (UART_QUPn / HSUART_QUPn ...); the 'interfaces' capability list is never used. For a QUP UART the pinctrl function is the same `qupN` the SPI engine uses, so the pin tables are READ FROM spi_profiles.json (Linux pinctrl driver of the SoC) and not copied. 'controller_defined' lists the UART controller numbers that the SoC's mainline dtsi really defines; any other UART number gets a controller label that is marked as a guess.",
+ "selected": [
+  {
+   "name": "qup",
+   "pattern": "(?<![a-z])(?P<hs>hs)?uart[-_ ]?(?:(?P<dom>ssc|sail)[-_ ]?)?(?P<inst>qup(?P<n>\\d+)(?:_?se(?P<se>\\d+))?)"
+  },
+  {
+   "name": "other",
+   "pattern": "(?<![a-z])(?P<hs>hs)?(?P<inst>uart[-_ ]?\\d+)(?![a-z0-9])"
+  }
+ ],
+ "roles": {
+  "cts": "(?<![a-z])(?:ut_)?cts(?![a-z])",
+  "rts": "(?<![a-z])(?:ut_)?(?:rts|rfr)(?![a-z])",
+  "tx": "(?<![a-z])(?:ut_)?tx(?:d)?(?![a-z])",
+  "rx": "(?<![a-z])(?:ut_)?rx(?:d)?(?![a-z])"
+ },
+ "socs": {
+  "SA8155P": {
+   "aliases": ["SA8155", "SM8150", "SA8155SIP"],
+   "pins_from": "SA8155P",
+   "controller": "uart{n}",
+   "controller_defined": [2, 9],
+   "source": "pin table and QUP wrappers: spi_profiles.json (Linux v6.6 pinctrl-sm8150.c / sm8150.dtsi); UART controllers defined in mainline sm8150.dtsi: uart2, uart9"
+  }
+ }
+}

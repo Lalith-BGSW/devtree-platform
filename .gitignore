@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+.env
+*.egg-info/
+backend/data/
+backend/.cache/
+*.updated
+output/
+tsconfig.tsbuildinfo

@@ -1,0 +1,29 @@
+/* Template B (fabricated): tabs, nested mux{} / config{}, 'label: label'. */
+
+&tlmm {
+	sample_gamma: sample_gamma {
+		mux {
+			pins = "gpio95";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio95";
+			drive-strength = <2>;
+			bias-disable;
+		};
+	};
+
+	sample_delta: sample_delta {
+		mux {
+			pins = "gpio96";
+			function = "gpio";
+		};
+
+		config {
+			pins = "gpio96";
+			drive-strength = <8>;
+			bias-pull-down;
+		};
+	};
+};

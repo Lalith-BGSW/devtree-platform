@@ -1,0 +1,15 @@
+/* A made-up board overlay. The regulator nodes are to be placed after the node named  emrst  (type: emrst). */
+/dts-v1/;
+
+/ {
+	model = "Demo board";
+
+	emrst: emrst {
+		compatible = "demo,reset";
+		status = "okay";
+	};
+
+	demo_leds: demo_leds {
+		compatible = "gpio-leds";
+	};
+};

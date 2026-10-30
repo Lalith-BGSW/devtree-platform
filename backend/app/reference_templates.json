@@ -1,0 +1,8 @@
+{
+  "_comment": "Which VBUS / over-current wiring style Hybrid mode assumes when no project file confirms one and none was chosen. One entry per SoC for which an ACCEPTED example exists. Edit this file to teach the tool a new accepted example - no code change. 'pattern' is 'controller' (oc-gpio / vbus-out-gpio on &usbN) or 'regulator' (regulator-fixed + vbus_dwc3-supply).",
+  "templates": [
+    {"soc": "SA8155P", "pattern": "controller", "source": "the accepted CCS20 example (SA8155P)"},
+    {"soc": "SA6155P", "pattern": "regulator",  "source": "the accepted Suzuki change (SA6155P)"}
+  ],
+  "default": {"pattern": "regulator", "source": "the accepted Suzuki change (a different SoC)"}
+}

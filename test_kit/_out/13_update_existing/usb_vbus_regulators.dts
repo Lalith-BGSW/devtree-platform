@@ -1,0 +1,37 @@
+/* === SECTION 1 - regulators: place INSIDE the same parent node as the project's other
+ * board nodes (not top-level). The tool cannot know that parent; use
+ * --overlay + --insert-after to automate. === */
+usb0_vbus_regulator: usb0_vbus_regulator {
+	compatible = "regulator-fixed";
+	regulator-name = "usb0_vbus_regulator";
+	regulator-min-microvolt = <5000000>;
+	regulator-max-microvolt = <5000000>;
+	enable-active-high;
+	gpio = <&tlmm 11 GPIO_ACTIVE_HIGH>;
+};
+
+usb1_vbus_regulator: usb1_vbus_regulator {
+	compatible = "regulator-fixed";
+	regulator-name = "usb1_vbus_regulator";
+	regulator-min-microvolt = <5000000>;
+	regulator-max-microvolt = <5000000>;
+	enable-active-high;
+	gpio = <&tlmm 13 GPIO_ACTIVE_HIGH>;
+};
+
+/* === SECTION 2 - top-level: append to the overlay file. === */
+&usb0 {
+	status = "okay";
+	vbus_dwc3-supply = <&usb0_vbus_regulator>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usbv2_0_power_enable>;
+	qcom,default-mode-host;
+};
+
+&usb1 {
+	status = "okay";
+	vbus_dwc3-supply = <&usb1_vbus_regulator>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usbv2_1_power_enable>;
+	/* NEEDS REVIEW: qcom,default-mode-host is only confirmed for usb0 - add it if this instance should default to host mode. */
+};

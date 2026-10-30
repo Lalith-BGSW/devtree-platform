@@ -1,0 +1,7 @@
+[1] Reading workbook demo_workbook.xlsx ... a large workbook can take a minute or more the first time (later runs use a cache)
+[1] Workbook read in 0.0s
+[2] Finding USB pins and checking TLMM membership ...
+[1] Reading workbook demo_workbook.xlsx ... a large workbook can take a minute or more the first time (later runs use a cache)
+[1] Workbook read in 0.0s
+[3] Updating existing nodes / generating missing ones ...
+--kernel 'banana': expected a version like 6.6, 5.15 or v6.1.20

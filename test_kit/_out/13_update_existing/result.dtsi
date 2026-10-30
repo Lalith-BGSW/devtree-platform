@@ -1,0 +1,65 @@
+/* A hand-written DTS with deliberate mistakes against demo_workbook.xlsx. */
+
+&tlmm {
+	usbv2_0_fault_detect: usbv2_0_fault_detect {
+		mux {
+			pins = "gpio10";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio10";
+			drive-strength = <4>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+
+	usbv2_1_fault_detect: usbv2_1_fault_detect {
+		mux {
+			pins = "gpio12";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio12";
+			drive-strength = <4>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+	usbv2_0_power_enable: usbv2_0_power_enable {
+		mux {
+			pins = "gpio11";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio11";
+			drive-strength = <4>;
+			output-low;  /* NEEDS REVIEW: level inferred as 'regulator OFF at boot' - matches the 2 accepted examples, not derivable from Excel; confirm */
+			bias-disable;
+		};
+	};
+	usbv2_1_power_enable: usbv2_1_power_enable {
+		mux {
+			pins = "gpio13";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio13";
+			drive-strength = <4>;
+			output-low;  /* NEEDS REVIEW: level inferred as 'regulator OFF at boot' - matches the 2 accepted examples, not derivable from Excel; confirm */
+			bias-disable;
+		};
+	};
+	cpu_usbhub_ctrl_hub_rst: cpu_usbhub_ctrl_hub_rst {
+		mux {
+			pins = "gpio14";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio14";
+			drive-strength = <8>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+};

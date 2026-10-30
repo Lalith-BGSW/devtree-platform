@@ -1,0 +1,92 @@
+/ {
+    soc {
+        tlmm: pinctrl@3100000 {
+            usb30_default: usb30-default-state {
+                oc-pins {
+                    pins = "gpio81";
+                    function = "gpio";
+                    drive-strength = <2>; /* 2mA */
+                    bias-pull-up;
+                };
+                vbus-pins {
+                    pins = "gpio82";
+                    function = "gpio";
+                    drive-strength = <2>; /* 2mA */
+                    bias-disable;
+                };
+            };
+            usb20_hub_default: usb20-hub-default-state {
+                vbus-pins {
+                    pins = "gpio92";
+                    function = "gpio";
+                    drive-strength = <2>;
+                    bias-disable;
+                };
+                oc-pins {
+                    pins = "gpio102";
+                    function = "gpio";
+                    drive-strength = <2>;
+                    bias-pull-up;
+                };
+                hub-reset-pins {
+                    pins = "gpio113";
+                    function = "gpio";
+                    drive-strength = <2>;
+                    bias-pull-up;
+                };
+            };
+            usb_hub_i2c_default: usb-hub-i2c-default-state {
+                 i2c-pins {
+                    pins = "gpio23", "gpio24";
+                    function = "qup18_i2c";
+                    drive-strength = <2>;
+                    bias-pull-up;
+                 };
+            };
+            usb_phy_sel_default: usb-phy-sel-default-state {
+                port-sel-pins {
+                    pins = "gpio38";
+                    function = "gpio";
+                    drive-strength = <2>;
+                    bias-pull-down;
+                };
+            };
+        };
+        i2c_18: i2c@a9c000 {
+            pinctrl-names = "default";
+            pinctrl-0 = <&usb_hub_i2c_default>;
+            status = "okay";
+            usb_hub: hub@2d {
+                 compatible = "microchip,usb2514";
+                 reg = <0x2d>;
+                 reset-gpios = <&tlmm 113 GPIO_ACTIVE_LOW>;
+                 i2c-en-gpios = <&tlmm 92 GPIO_ACTIVE_HIGH>;
+            };
+        };
+        usb_0: usb@a600000 {
+            oc-gpio = <&tlmm 81 GPIO_ACTIVE_LOW>;
+            vbus-out-gpio = <&tlmm 82 GPIO_ACTIVE_HIGH>;
+            debounce-delay-ms = <20>;
+            pinctrl-names = "default";
+            pinctrl-0 = <&usb30_default>;
+            qcom,default-mode-host;
+            usb-phy = <&usb_1_hs_phy>, <&usb_1_ss_phy>;
+            maximum-speed = "super-speed";
+        };
+        usb_1: usb@a800000 {
+            vbus-out-gpio = <&tlmm 92 GPIO_ACTIVE_HIGH>;
+            oc-gpio = <&tlmm 102 GPIO_ACTIVE_LOW>;
+            debounce-delay-ms = <20>;
+            pinctrl-names = "default";
+            pinctrl-0 = <&usb20_hub_default>;
+            qcom,default-mode-host;
+            usb-phy = <&usb_2_hs_phy>;
+            maximum-speed = "high-speed";
+        };
+        usb_phy_ctrl {
+            usb-phy-port-select-gpio = <&tlmm 38 GPIO_ACTIVE_HIGH>;
+            pinctrl-names = "default";
+            pinctrl-0 = <&usb_phy_sel_default>;
+        };
+    };
+};

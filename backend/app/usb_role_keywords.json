@@ -1,0 +1,5 @@
+{
+  "_comment": "Signal-name vocabulary: which words in the part after the colon of a Gen5 Signal Name mean OVER-CURRENT ('oc') or a VBUS / port POWER ENABLE ('vbus'). Regular expressions, matched case-insensitively against the upper-cased signal tail. Edit this file to teach the tool a project's naming - no code change. A signal that matches neither stays an 'other GPIO' (and, in Hybrid mode, the AI is asked about it). --role SIGNAL=oc|vbus overrides a single run. Whatever matches here is still checked against the workbook's own direction (over-current = input, VBUS enable = output).",
+  "oc": ["(^|_)OC(_|$)", "FAULT", "OVER_?CURRENT", "(^|_)OCP(_|$)"],
+  "vbus": ["PWR_EN", "VBUS", "EXTERNAL_EN"]
+}

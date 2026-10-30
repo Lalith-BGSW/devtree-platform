@@ -1,0 +1,55 @@
+{
+ "_doc": "I2C pin selection patterns and SoC data. A pin is I2C only when the workbook's SELECTED function says so (I2C_QUPn, I2C_QUPn_SEk ...); the 'interfaces' capability list is never used. A QUP I2C uses the same `qupN` pinctrl function as SPI and UART, so the pin tables are READ FROM spi_profiles.json (Linux pinctrl driver of the SoC) and not copied. 'controller_defined' lists the I2C controller numbers the SoC's mainline dtsi really defines; any other number gets a controller label that is marked as a guess. CCI (camera control interface) and non-QUP I2C are listed as left out, never guessed.",
+ "selected": [
+  {
+   "name": "qup",
+   "pattern": "(?<![a-z])i2c[-_ ]?(?:(?P<dom>ssc|sail)[-_ ]?)?(?P<inst>qup(?P<n>\\d+)(?:_?se(?P<se>\\d+))?)"
+  },
+  {
+   "name": "cci",
+   "pattern": "^\\s*(?P<inst>cci)\\s*$"
+  },
+  {
+   "name": "other",
+   "pattern": "(?<![a-z])(?P<inst>i2c[-_ ]?\\d+)(?![a-z0-9])"
+  }
+ ],
+ "roles": {
+  "sda": "(?<![a-z])sda\\d*(?![a-z])",
+  "scl": "(?<![a-z])scl\\d*(?![a-z])"
+ },
+ "socs": {
+  "SA8155P": {
+   "aliases": [
+    "SA8155",
+    "SM8150",
+    "SA8155SIP"
+   ],
+   "pins_from": "SA8155P",
+   "controller": "i2c{n}",
+   "controller_defined": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+   ],
+   "source": "pin table and QUP wrappers: spi_profiles.json (Linux v6.6 pinctrl-sm8150.c / sm8150.dtsi); I2C controllers defined in mainline sm8150.dtsi: i2c0 .. i2c19"
+  }
+ }
+}

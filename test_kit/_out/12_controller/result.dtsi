@@ -1,0 +1,87 @@
+
+
+&tlmm {
+	usbv2_0_fault_detect: usbv2_0_fault_detect {
+		mux {
+			pins = "gpio10";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio10";
+			drive-strength = <4>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+	usbv2_0_power_enable: usbv2_0_power_enable {
+		mux {
+			pins = "gpio11";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio11";
+			drive-strength = <4>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+	usbv2_1_fault_detect: usbv2_1_fault_detect {
+		mux {
+			pins = "gpio12";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio12";
+			drive-strength = <4>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+	usbv2_1_power_enable: usbv2_1_power_enable {
+		mux {
+			pins = "gpio13";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio13";
+			drive-strength = <4>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+	cpu_usbhub_ctrl_hub_rst: cpu_usbhub_ctrl_hub_rst {
+		mux {
+			pins = "gpio14";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio14";
+			drive-strength = <8>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+};
+
+&usb0 {
+	oc-gpio = <&tlmm 10 GPIO_ACTIVE_LOW>;
+	/* Excel remark (GPIO_11): PD during reset */
+	vbus-out-gpio = <&tlmm 11 GPIO_ACTIVE_HIGH>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usbv2_0_fault_detect &usbv2_0_power_enable>;
+
+	qcom,default-mode-host;
+
+	/* NEEDS REVIEW: debounce-delay-ms, the dwc3 child (unit address, usb-phy, maximum-speed) - only confirmed for the reference instance;
+	 * add from a real reference if this instance needs them. */
+};
+
+&usb1 {
+	oc-gpio = <&tlmm 12 GPIO_ACTIVE_LOW>;
+	vbus-out-gpio = <&tlmm 13 GPIO_ACTIVE_HIGH>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usbv2_1_fault_detect &usbv2_1_power_enable>;
+
+	/* NEEDS REVIEW: debounce-delay-ms, qcom,default-mode-host, the dwc3 child (unit address, usb-phy, maximum-speed) - only confirmed for the reference instance;
+	 * add from a real reference if this instance needs them. */
+};

@@ -1,0 +1,23 @@
+# Core dependencies - pure Python / prebuilt wheels only, no C compiler
+# needed on any platform. The app is fully functional with just these:
+# retrieval uses lexical (token-overlap) search instead of embeddings.
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+openpyxl==3.1.5
+python-multipart==0.0.9
+pydantic==2.9.2
+jinja2==3.1.4
+# Needed only to RUN THE TEST SUITE (scripts/review_report_test.py uses
+# FastAPI's TestClient, which requires the real "httpx" package).
+# Not needed to run the app itself (uvicorn serves real HTTP directly,
+# no httpx involved).
+httpx>=0.27.0
+
+# --- Optional: better semantic search ---
+# Uncomment the two lines below for embedding-based (vs. keyword-overlap)
+# RAG retrieval. Skip these entirely if you hit a build error installing
+# numpy/torch (common on locked-down Windows machines without a C/C++
+# compiler, or restricted package mirrors) - the app works correctly
+# without them, just with less semantically-fuzzy search matching.
+# numpy>=1.26
+# sentence-transformers>=3.1.1

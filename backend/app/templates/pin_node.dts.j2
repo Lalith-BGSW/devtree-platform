@@ -1,0 +1,25 @@
+	{{ node_name }}: {{ node_name }} {
+		mux {
+			pins = {% for p in pins %}"{{ p }}"{% if not loop.last %}, {% endif %}{% endfor %};
+			function = "{{ function }}";
+		};
+
+		config {
+			pins = {% for p in pins %}"{{ p }}"{% if not loop.last %}, {% endif %}{% endfor %};
+{% if drive_strength %}
+			drive-strength = <{{ drive_strength }}>;
+{% else %}
+			/* NEEDS REVIEW: drive-strength not determined from workbook IO_DRV_STRENGTH field */
+{% endif %}
+{% if bias_directive %}
+			{{ bias_directive }};
+{% else %}
+			/* NEEDS REVIEW: bias not determined from workbook IO_GPIO_PULL field */
+{% endif %}
+{% if direction_directive %}
+			{{ direction_directive }};
+{% elif output_level_unknown %}
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+{% endif %}
+		};
+	};

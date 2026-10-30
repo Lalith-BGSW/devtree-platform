@@ -1,0 +1,29 @@
+/* A hand-written DTS with deliberate mistakes against demo_workbook.xlsx. */
+
+&tlmm {
+	usbv2_0_fault_detect: usbv2_0_fault_detect {
+		mux {
+			pins = "gpio10";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio10";
+			drive-strength = <16>;
+			input-enable;
+			bias-pull-down;
+		};
+	};
+
+	usbv2_1_fault_detect: usbv2_1_fault_detect {
+		mux {
+			pins = "gpio12";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio12";
+			drive-strength = <4>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+};

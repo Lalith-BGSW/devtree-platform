@@ -1,0 +1,64 @@
+
+
+&tlmm {
+	usbv3_fault_detect: usbv3_fault_detect {
+		mux {
+			pins = "gpio81";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio81";
+			drive-strength = <10>;
+			input-enable;
+			bias-disable;
+		};
+	};
+	usbv3_power_enable: usbv3_power_enable {
+		mux {
+			pins = "gpio82";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio82";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+	usbv2_fault_detect: usbv2_fault_detect {
+		mux {
+			pins = "gpio102";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio102";
+			drive-strength = <10>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+	sa8155_cfg_usb_phy_port_select: sa8155_cfg_usb_phy_port_select {
+		mux {
+			pins = "gpio38";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio38";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-pull-down;
+		};
+	};
+	cpu_usbhub_ctrl_rst: cpu_usbhub_ctrl_rst {
+		mux {
+			pins = "gpio113";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio113";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+};

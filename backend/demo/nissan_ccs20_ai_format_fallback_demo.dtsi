@@ -1,0 +1,17 @@
+/*
+ * Nissan CCS20 AI format-fallback test fixture.
+ * Pin and values come from the real dp_hot_plug_detect state in
+ * backend/samples/ccs20-pinmux.dtsi. Only the node structure is reshaped
+ * to exercise the opt-in AI reader; this is not a deployable DTS file.
+ */
+
+&tlmm {
+	dp_hot_plug_detect: dp_hot_plug_detect {
+		pinconf {
+			pins = "gpio10";
+			function = "gpio";
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
+};

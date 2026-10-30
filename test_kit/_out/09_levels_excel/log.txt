@@ -1,0 +1,14 @@
+WRONG 0 | AMBIGUOUS 0 | UNVERIFIABLE 0 | OK 9  -> C:\Users\MOL2COB\AppData\Local\Temp\bundle_cnd87g5p\v.md
+Output : C:\Users\MOL2COB\Downloads\devtree-platform_unified_new\test_kit\_out\09_levels_excel\result.dtsi
+Report : C:\Users\MOL2COB\Downloads\devtree-platform_unified_new\test_kit\_out\09_levels_excel\report.md
+Pattern: regulator (explicitly requested (--pattern regulator))
+Overlay: ..\test_kit\_out\09_levels_excel\usb_vbus_regulators.dts
+Updated values: 0 | consumer nodes generated: 0 | regulators generated: 2 | new pinctrl states: 5 | other GPIOs included: 1 | unsupported controller pins: 0 | controller unconfirmed: 0 | needs review: 1
+[1] Reading workbook demo_workbook.xlsx ... a large workbook can take a minute or more the first time (later runs use a cache)
+[1] Workbook read in 0.0s
+[2] Finding USB pins and checking TLMM membership ...
+[1] Reading workbook demo_workbook.xlsx ... a large workbook can take a minute or more the first time (later runs use a cache)
+[1] Workbook read in 0.0s
+[3] Updating existing nodes / generating missing ones ...
+[1] Reading workbook demo_workbook.xlsx ... a large workbook can take a minute or more the first time (later runs use a cache)
+[1] Workbook read in 0.0s

@@ -1,0 +1,601 @@
+/* Generic pin-state preview - A0_sample
+ * UNVERIFIED PREVIEW - the pin names, function strings and property names below come from the workbook, written in Qualcomm-style syntax. The real pinctrl binding of this SoC is not known to the tool: replace before use.
+ */
+
+&pinctrl {
+	/* NEEDS REVIEW: the pin controller node label is assumed */
+	gpsb_06_default: gpsb_06-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_A06", "GPIO_A07", "GPIO_A08", "GPIO_A09";
+			function = "GPSB_06";
+			/* workbook mux value: 6 */
+		};
+		config_gpio_a06 {
+			pins = "GPIO_A06";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_ACCGYRO_SPI_3V3:SPI_CLK */
+		};
+		config_gpio_a07 {
+			pins = "GPIO_A07";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_ACCGYRO_SPI_3V3:SPI_CS_B */
+		};
+		config_gpio_a08 {
+			pins = "GPIO_A08";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_ACCGYRO_SPI_3V3:SPI_MOSI */
+		};
+		config_gpio_a09 {
+			pins = "GPIO_A09";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_ACCGYRO_SPI_3V3:SPI_MISO */
+		};
+	};
+
+	gpsb_24_default: gpsb_24-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_E11", "GPIO_E12", "GPIO_E13", "GPIO_E14";
+			function = "GPSB_24";
+			/* workbook mux value: 6 */
+		};
+		config_gpio_e11 {
+			pins = "GPIO_E11";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_TUN_SPI_3V3:SPI_CLK */
+		};
+		config_gpio_e12 {
+			pins = "GPIO_E12";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_TUN_STA710_1_SPI_CS_3V3:SPI_CS_B */
+		};
+		config_gpio_e13 {
+			pins = "GPIO_E13";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_TUN_SPI_3V3:SPI_MOSI */
+		};
+		config_gpio_e14 {
+			pins = "GPIO_E14";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_TUN_SPI_3V3:SPI_MISO */
+		};
+	};
+
+	uart_08_default: uart_08-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_A18", "GPIO_A19";
+			function = "UART_08";
+			/* workbook mux value: 7 */
+		};
+		config_gpio_a18 {
+			pins = "GPIO_A18";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_TXD08 but the Gen5 signal says UART_RXD - looks named from the other end of the link; confirm */
+			/* CPU_DVR_UART_3V3:UART_RXD */
+		};
+		config_gpio_a19 {
+			pins = "GPIO_A19";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_RXD08 but the Gen5 signal says UART_TXD - looks named from the other end of the link; confirm */
+			/* CPU_DVR_UART_3V3:UART_TXD */
+		};
+	};
+
+	uart_09_default: uart_09-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_A24", "GPIO_A25";
+			function = "UART_09";
+			/* workbook mux value: 7 */
+		};
+		config_gpio_a24 {
+			pins = "GPIO_A24";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_DBG_UART_3V3:A53_UART_TXD */
+		};
+		config_gpio_a25 {
+			pins = "GPIO_A25";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_DBG_UART_3V3:A53_UART_RXD */
+		};
+	};
+
+	uart_18_default: uart_18-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_C10", "GPIO_C11";
+			function = "UART_18";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_c10 {
+			pins = "GPIO_C10";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_DBG_UART_1V8:A72_UART_TXD */
+		};
+		config_gpio_c11 {
+			pins = "GPIO_C11";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_DBG_UART_1V8:A72_UART_RXD */
+		};
+	};
+
+	uart_20_default: uart_20-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_C16", "GPIO_C17", "GPIO_C18", "GPIO_C19";
+			function = "UART_20";
+			/* workbook mux value: 7 */
+		};
+		config_gpio_c16 {
+			pins = "GPIO_C16";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_TXD20 but the Gen5 signal says UART_RXD - looks named from the other end of the link; confirm */
+			/* CPU_BT_UART_1V8:UART_RXD */
+		};
+		config_gpio_c17 {
+			pins = "GPIO_C17";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_RXD20 but the Gen5 signal says UART_TXD - looks named from the other end of the link; confirm */
+			/* CPU_BT_UART_1V8:UART_TXD */
+		};
+		config_gpio_c18 {
+			pins = "GPIO_C18";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_RTS20 but the Gen5 signal says UART_CTS - looks named from the other end of the link; confirm */
+			/* CPU_BT_UART_1V8:UART_CTS */
+		};
+		config_gpio_c19 {
+			pins = "GPIO_C19";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_CTS20 but the Gen5 signal says UART_RTS - looks named from the other end of the link; confirm */
+			/* CPU_BT_UART_1V8:UART_RTS */
+		};
+	};
+
+	uart_32_default: uart_32-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MA06", "GPIO_MA07";
+			function = "UART_32";
+			/* workbook mux value: 7 */
+		};
+		config_gpio_ma06 {
+			pins = "GPIO_MA06";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* SCC_LIN_UART_3V3:UART_TXD */
+		};
+		config_gpio_ma07 {
+			pins = "GPIO_MA07";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* SCC_LIN_UART_3V3:UART_RXD */
+		};
+	};
+
+	uart_37_default: uart_37-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MB00", "GPIO_MB01";
+			function = "UART_37";
+			/* workbook mux value: 7 */
+		};
+		config_gpio_mb00 {
+			pins = "GPIO_MB00";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_TXD37 but the Gen5 signal says UART_RXD - looks named from the other end of the link; confirm */
+			/* CPU_GNSS_UART_3V3:UART_RXD */
+		};
+		config_gpio_mb01 {
+			pins = "GPIO_MB01";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* NEEDS REVIEW: the pin is UT_RXD37 but the Gen5 signal says UART_TXD - looks named from the other end of the link; confirm */
+			/* CPU_GNSS_UART_3V3:UART_TXD */
+		};
+	};
+
+	uart_46_default: uart_46-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MC24", "GPIO_MC25";
+			function = "UART_46";
+			/* workbook mux value: 7 */
+		};
+		config_gpio_mc24 {
+			pins = "GPIO_MC24";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* SCC_DBG_UART_3V3:MC_UART_TXD */
+		};
+		config_gpio_mc25 {
+			pins = "GPIO_MC25";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* SCC_DBG_UART_3V3:MC_UART_RXD */
+		};
+	};
+
+	i2c_03_default: i2c_03-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_A04", "GPIO_A05";
+			function = "I2C_03";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_a04 {
+			pins = "GPIO_A04";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_VO2_CFG_I2C_3V3:I2C_SCL */
+		};
+		config_gpio_a05 {
+			pins = "GPIO_A05";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_VO2_CFG_I2C_3V3:I2C_SDA */
+		};
+	};
+
+	i2c_06_default: i2c_06-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_A22", "GPIO_A23";
+			function = "I2C_06";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_a22 {
+			pins = "GPIO_A22";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_VI12_CMN_CFG_I2C_3V3:I2C_SCL */
+		};
+		config_gpio_a23 {
+			pins = "GPIO_A23";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_VI12_CMN_CFG_I2C_3V3:I2C_SDA */
+		};
+	};
+
+	i2c_14_default: i2c_14-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_C14", "GPIO_C15";
+			function = "I2C_14";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_c14 {
+			pins = "GPIO_C14";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_VI_CMN_CFG_I2C_1V8:I2C_SCL */
+		};
+		config_gpio_c15 {
+			pins = "GPIO_C15";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_VI_CMN_CFG_I2C_1V8:I2C_SDA */
+		};
+	};
+
+	i2c_15_default: i2c_15-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_C20", "GPIO_C21";
+			function = "I2C_15";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_c20 {
+			pins = "GPIO_C20";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_APPLE_I2C_1V8:I2C_SCL */
+		};
+		config_gpio_c21 {
+			pins = "GPIO_C21";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_APPLE_I2C_1V8:I2C_SDA */
+		};
+	};
+
+	i2c_20_default: i2c_20-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_E09", "GPIO_E10";
+			function = "I2C_20";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_e09 {
+			pins = "GPIO_E09";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_DTV_I2C_3V3:I2C_SCL */
+		};
+		config_gpio_e10 {
+			pins = "GPIO_E10";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_DTV_I2C_3V3:I2C_SDA */
+		};
+	};
+
+	i2c_24_default: i2c_24-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MA04", "GPIO_MA05";
+			function = "I2C_24";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_ma04 {
+			pins = "GPIO_MA04";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* SCC_PWR_I2C_3V3:SCL */
+		};
+		config_gpio_ma05 {
+			pins = "GPIO_MA05";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* SCC_PWR_I2C_3V3:SDA */
+		};
+	};
+
+	i2c_30_default: i2c_30-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MB10", "GPIO_MB11";
+			function = "I2C_30";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_mb10 {
+			pins = "GPIO_MB10";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_USBHUB_I2C_3V3:I2C_SCL */
+		};
+		config_gpio_mb11 {
+			pins = "GPIO_MB11";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_USBHUB_I2C_3V3:I2C_SDA */
+		};
+	};
+
+	i2c_32_default: i2c_32-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MB22", "GPIO_MB23";
+			function = "I2C_32";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_mb22 {
+			pins = "GPIO_MB22";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_AUD_I2C_3V3:SCL */
+		};
+		config_gpio_mb23 {
+			pins = "GPIO_MB23";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_AUD_I2C_3V3:SDA */
+		};
+	};
+
+	i2c_33_default: i2c_33-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MB26", "GPIO_MB27";
+			function = "I2C_33";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_mb26 {
+			pins = "GPIO_MB26";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_TP_PT_I2C_3V3:I2C_SCL */
+		};
+		config_gpio_mb27 {
+			pins = "GPIO_MB27";
+			bias-disable;
+			/* workbook drive strength 'x1' - units unconfirmed, not converted */
+			/* CPU_TP_PT_I2C_3V3:I2C_SDA */
+		};
+	};
+
+	i2c_35_default: i2c_35-default {
+		/* UNVERIFIED PREVIEW - see the note at the top of the file */
+		mux {
+			pins = "GPIO_MC04", "GPIO_MC05";
+			function = "I2C_35";
+			/* workbook mux value: 8 */
+		};
+		config_gpio_mc04 {
+			pins = "GPIO_MC04";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_PERI_I2C_3V3:I2C_SCL */
+		};
+		config_gpio_mc05 {
+			pins = "GPIO_MC05";
+			bias-disable;
+			/* workbook drive strength 'x4' - units unconfirmed, not converted */
+			/* CPU_PERI_I2C_3V3:I2C_SDA */
+		};
+	};
+};
+
+/* UNVERIFIED PREVIEW */
+&gpsb_06 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpsb_06_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&gpsb_24 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpsb_24_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_08 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_08_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_09 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_09_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_18 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_18_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_20 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_20_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_32 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_32_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_37 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_37_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&uart_46 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&uart_46_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_03 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_03_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_06 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_06_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_14 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_14_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_15 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_15_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_20 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_20_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_24 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_24_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_30 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_30_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_32 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_32_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_33 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_33_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};
+
+/* UNVERIFIED PREVIEW */
+&i2c_35 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&i2c_35_default>;
+	/* NEEDS REVIEW: controller node name and any other properties are not known to the tool */
+};

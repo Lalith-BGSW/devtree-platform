@@ -1,0 +1,386 @@
+/* Copyright (c) 2018-2019, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "sa6155p-adp-air-overlay.dts"
+#include "sa6150p-oem-suz-da3-C1-pinmux.dtsi"
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include "sm6150-oem-suz-da3-ssc-qupv3.dtsi"
+
+/ {
+	model = "SUZ DA3 C1";
+	compatible = "qcom,suz-da3-C1", "qcom,sa6155p";
+	qcom,board-id = <0x03000605 0>;
+};
+
+/ {
+	fragment@aliases {
+		target-path = "/aliases";
+		__overlay__ {
+			spi3 = "/soc/qcom,qupv3_1_geni_se@ac0000/spi@a80000";
+			spi4 = "/soc/qcom,qupv3_0_geni_se@8c0000/spi@888000";			/* SE2  INC-M  */
+			spi5 = "/soc/qcom,qupv3_1_geni_se@ac0000/spi@a88000";			/* SE6  INC-S  */
+			hsuart1 = "/soc/qcom,qupv3_2_geni_se@626c0000/qcom,qup_uart@62688000";	/* SE10 GNSS   */
+			hsuart2 = "/soc/qcom,qupv3_2_geni_se@626c0000/qcom,qup_uart@6268c000"; 	/* SE11 DVR */
+			hsuart4 = "/soc/qcom,qupv3_2_geni_se@626c0000/qcom,qup_uart@62694000"; 	/* SE13 DTV */
+			hsuart5 = "/soc/qcom,qupv3_2_geni_se@626c0000/qcom,qup_uart@62690000"; 	/* SE12 SCC-DNL */
+		};
+	};
+};
+
+/* SSC QUP1 USB20_HUB, VO0_LT8711UX_sb, VO2_MAX96781_sb */
+&qupv3_se9_i2c {
+	status = "okay";
+	qcom,clk-freq-out = <100000>;
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&qupv3_se9_i2c_active >;
+	pinctrl-1 = <&qupv3_se9_i2c_sleep >;
+
+	usb8251x: usb8251x@2c { /* USB82512 */
+		compatible = "microchip,usb8251x";
+		reg = <0x2c>;
+		reset-gpios = <&tlmm 106 GPIO_ACTIVE_LOW>;
+		config = "microchip/USB8251x_cfg.raw";
+		pinctrl-names = "default", "sleep";
+		pinctrl-0 = <&cpu_usbhub_rst>;
+		pinctrl-1 = <&cpu_usbhub_rst_sleep>;
+	};
+};
+
+&vreg_conn_pa {
+	gpio = <&tlmm 52 GPIO_ACTIVE_HIGH>;
+};
+
+&vreg_conn_1p8{
+	gpio = <&tlmm 50 GPIO_ACTIVE_HIGH>;
+};
+
+/*WLAN*/
+&cnss_pcie {
+	status = "okay";
+	wlan-en-gpio = <&tlmm 48 GPIO_ACTIVE_HIGH>;
+	pinctrl-0 = <&cpu_btwlan_ctrl_1v8_wlan_en>;
+	pinctrl-1 = <&cpu_btwlan_ctrl_1v8_wlan_en_sleep>;
+};
+
+/*PCIe interface for Wlan*/
+&pcie0 {
+	status = "okay";
+	pinctrl-names = "default";
+	pinctrl-0 = <&wlan_pcie_ctrl_clkreq &cpu_wlan_pcie_ctrl_1v8_nreset_b &wlan_pcie_ctrl_wake>;
+};
+
+/* BT Configuration */
+&bluetooth {
+	status = "okay";
+	pinctrl-0 = <&cpu_btwlan_ctrl_1v8_bt_en>;
+	qcom,bt-reset-gpio = <&tlmm 49 0>;
+	qcom,wl-reset-gpio = <&tlmm 48 0>;
+};
+
+/* Configure SBR Interfaces */
+&hsi2s {
+	status = "ok";
+	mtd = <1>;
+	dma-buffer-length = <4>;
+	lpaif-mode = <1>;
+	qmi = <1>;
+};
+&sdr0 {
+	bit-clock-hz = <65536000>;
+	data-buffer-ms = <8>;
+};
+&sdr1 {
+	bit-clock-hz = <65536000>;
+	data-buffer-ms = <8>;
+};
+
+/* SBR tuner SPI Configuration */
+/* Disable UART for SE4, enable SPI */
+&qupv3_se4_2uart {
+	status = "disabled";
+};
+
+&qupv3_se4_spi {
+	status = "okay";
+	pinctrl-0 = <&qupv3_se4_spi_active_suz>;
+	pinctrl-1 = <&qupv3_se4_spi_sleep_suz>;
+	spi-max-frequency = <4000000>;
+	cs-gpios = <&tlmm 23 GPIO_ACTIVE_LOW>,
+		   <&tlmm 108 GPIO_ACTIVE_LOW>,
+		   <&tlmm 110 GPIO_ACTIVE_LOW>;
+	spi_codec@0 {
+		status = "disabled";
+	};
+	dev@0 {
+		compatible = "qcom,spi-msm-codec-slave";
+		reg = <0>;
+		spi-cpol;
+		spi-cpha;
+	};
+	dev@2 {
+		compatible = "qcom,spi-msm-codec-slave";
+		reg = <2>;
+		spi-cpol;
+		spi-cpha;
+	};
+};
+
+/* GYRO/ACC */
+&qupv3_se5_i2c {
+	status = "ok";
+	pinctrl-names = "default", "sleep";
+	pinctrl-0 = <&qupv3_se5_i2c_active>;
+	pinctrl-1 = <&qupv3_se5_i2c_sleep>;
+	qcom,clk-freq-out = <400000>;
+
+	#address-cells = <0x1>;
+	#size-cells = <0x0>;
+
+	smi230acc@18 {
+		compatible = "SMI230ACC";
+		reg = <0x18>;
+		gpio_irq = <&tlmm 119 0>;
+	};
+
+	smi230gyro@68 {
+		compatible = "SMI230GYRO";
+		reg = <0x68>;
+		gpio_irq = <&tlmm 121 0>;
+	};
+};
+
+/* disable sdp configuration */
+&qupv3_se12_i2c {
+	status = "disabled";
+
+};
+
+/* SSC TP I2C*/
+&qupv3_se13_i2c {
+	status = "disabled";
+
+};
+
+/* SSC QUP0 Audio */
+&qupv3_se8_i2c {
+	status = "ok";
+	qcom,clk-freq-out = <400000>;
+};
+
+&qupv3_se1_i2c {
+	status = "okay";
+
+	qcom,clk-freq-out = <400000>;
+
+	sn65dsi84_1: sn65dsi84@2c {
+		compatible = "ti,sn65dsi84";
+		reg = <0x2c>;
+		interrupt-parent = <&tlmm>;
+		dsi_err-irq-gpio = <&tlmm 84 IRQ_TYPE_EDGE_RISING>;
+		enable-gpio = <&tlmm 67 0>;
+		grb-gpio = <&tlmm 103 0>;
+		tp_en-gpio = <&tlmm 92 0>;
+		stbyb-gpio = <&tlmm 99 0>;
+		backlight_led_en-gpio = <&tlmm 79 0>;
+		rse_dev-gpio = <&tlmm 89 0>;
+		ports {
+		#address-cells = <1>;
+		#size-cells = <0>;
+		port@0 {
+			reg = <0>;
+			sn65dsi84_1_in: endpoint {
+				remote-endpoint = <&dsi_sn65dsi84_1_out>;
+				};
+			};
+		};
+	};
+	novatek@62 {
+		compatible = "novatek,NVT-ts";
+		reg = <0x62>;
+		interrupt-parent = <&tlmm>;
+		novatek,irq-gpio = <&tlmm 93 IRQ_TYPE_EDGE_RISING>;
+	};
+};
+
+#include "sa6150p-oem-suz-da3-display.dtsi"
+
+/* Qualcomm display device tree enabeles se2 as i2c which we don't want */
+&qupv3_se2_i2c {
+	status = "disabled";
+};
+
+/* Apple Authetication */
+&qupv3_se3_i2c {
+	status = "ok";
+	qcom,clk-freq-out = <400000>;
+};
+
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+#include <dt-bindings/clock/qcom,camcc-sm6150.h>
+#include <dt-bindings/interconnect/qcom,sm6150.h>
+#include <dt-bindings/regulator/qcom,rpmh-regulator-levels.h>
+
+#include "sm6150-camera.dtsi"
+#include "sa6155p-camera.dtsi"
+#include "sa6150p-oem-suz-da3-generic-cam.dtsi"
+#include "sa6150p-oem-suz-da3-jpn-cam.dtsi"
+
+/* SOC QUP3 INC Master */
+&qupv3_se2_spi {
+	status = "okay";
+	spi-max-frequency = <19200000>;
+	spidevmaster@0 {
+		compatible = "qcom,spi-msm-codec-slave";
+		reg = <0>;
+		spi-max-frequency = <19200000>;
+	};
+};
+
+/*INC SPI-S*/
+&qupv3_se6_spi {
+	status = "okay";
+	spi-max-frequency = <19200000>;
+	qcom,slv-ctrl;
+	slv-cross-connected;
+	can-controller@0 {
+		status = "disabled";
+	};
+
+	slave@0 {
+		compatible = "qcom,spi-msm-codec-slave";
+		reg = <0>;
+		spi-max-frequency = <19200000>;
+	};
+};
+
+/*OEM Specific SOC Configurations*/
+#include <dt-bindings/input/linux-event-codes.h>
+&soc {
+	/*INC Interface configuration*/
+	board-configuration {
+		inc {
+			inc_scc: scc {
+			local-addr      = "192.168.203.1";
+			remote-addr     = "192.168.203.2";
+			interface-name  = "oem0_700";
+			hostname        = "scc";
+			};
+		};
+	};
+
+	gpio_inc: gpio@0{
+		gpio-controller;
+		compatible = "rbcm,gpio-inc";
+		/* nof arguments of 'gpios' property*/
+		#gpio-cells = <2>;
+		node = <&inc_scc>; /* INC node */
+	};
+
+	pwm_inc: pwm_inc {
+		compatible = "rbcm,pwm-inc";
+		node = <&inc_scc>;
+		/* INC node for pwm-inc drv */
+	};
+		input_scc: input_scc {
+				compatible = "rbcm,input-inc";
+				node = <&inc_scc>;
+	};
+
+	gpio_keys:gpio-keys {
+		compatible = "gpio-keys";
+		label = "gpio-keys";
+		key_power {
+			label = "power";
+			linux,code = <KEY_POWER>;
+			gpios = <&tlmm 41 GPIO_ACTIVE_LOW>;
+			linux,input-type = <1>;
+			debounce-interval = <30>;
+			wakeup-source;
+		};
+	};
+
+	/* INC node for rtc-inc drv */
+	rtc_inc: rtc_inc {
+		compatible = "rbcm,rtc-inc";
+	};
+
+	/*PPS*/
+	pps {
+		compatible = "pps-gpio";
+		label = "pps-gpio";
+		pinctrl-names = "default";
+		pinctrl-0 = <&cpu_gnss_ctrl_1v8_1pps>;
+		gpios = <&tlmm 82 GPIO_ACTIVE_HIGH>;
+		assert-falling-edge;
+		status = "ok";
+	};
+
+	emrst {
+		compatible = "rbcm,emrst";
+		scc-rstwarn-cpu {
+			/* SCC_RSTWARN_CPU */
+			gpios = <&tlmm 70 GPIO_ACTIVE_HIGH>;
+			input;
+			edge=<1>; /* 1 = rising, 2 = falling */
+		};
+	};
+};
+
+&gpio_inc{
+	gpio-line-names =
+		"pkb",
+		"mirror-close",
+		"rvs-in",
+		"cam-sw",
+		"ecall_inp",
+		"ign",
+		"u33s_disp_on",
+		"uxxs_fb_on",
+		"u140s_peri_on",
+		"scc_bl_flt_1",
+		"scc_bl_flt_2";
+};
+
+/* GNSS UART */
+/* disable se10_spi as we use is as UART */
+&qupv3_se10_spi {
+	status = "disabled";
+};
+
+&qupv3_se10_2uart {
+	status = "okay";
+	qcom,auto-suspend-disable;
+};
+
+/* SCC-DNL UART */
+&qupv3_se12_2uart{
+	status = "ok";
+	qcom,auto-suspend-disable;
+};
+
+/* DVR UART */
+&qupv3_se11_2uart {
+	status = "ok";
+	qcom,auto-suspend-disable;
+	framing_error_check_disable;
+};
+
+/* SSC QUP5 DTV UART */
+&qupv3_se13_2uart {
+	status = "ok";
+	qcom,auto-suspend-disable;
+};
+

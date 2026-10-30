@@ -1,0 +1,5 @@
+Demo schematic notes (made up)
+------------------------------
+Sheet 4, USB power: the USB0 VBUS switch is enabled by a high level on USB0_PWR_EN (GPIO_11).
+At power-up the line is held low by a pull-down, so the port stays off until software drives it high.
+Sheet 4, USB hub: HUB_RST (GPIO_14) is active low. The hub is held in reset while the line is low and boots when it is driven high.

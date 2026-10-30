@@ -1,0 +1,15 @@
+{
+  "_note": "Non-gpioN pins that DO belong to the TLMM pin controller (from the kernel pinctrl driver). Matched by workbook pad name (letters/digits only, lower case). Add a SoC family here instead of editing code.",
+  "families": [
+    {
+      "socs": ["8155", "8150", "8195"],
+      "driver": "pinctrl-sm8150.c",
+      "pins": [
+        {"match": "^sdc2clk$", "dts": "sdc2_clk"},
+        {"match": "^sdc2cmd$", "dts": "sdc2_cmd"},
+        {"match": "^sdc2data\\d$", "dts": "sdc2_data"},
+        {"match": "^ufs1reset$", "dts": "ufs_reset"}
+      ]
+    }
+  ]
+}

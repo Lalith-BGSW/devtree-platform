@@ -1,0 +1,104 @@
+&tlmm {
+	usbv3_fault_detect: usbv3_fault_detect {
+		mux {
+			pins = "gpio81";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio81";
+			drive-strength = <10>;
+			input-enable;
+			bias-disable;
+		};
+	};
+
+	usbv3_power_enable: usbv3_power_enable {
+		mux {
+			pins = "gpio82";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio82";
+			drive-strength = <10>;
+			output-high; /* source: FACT 1 */
+			bias-disable;
+		};
+	};
+
+	usbv2_fault_detect: usbv2_fault_detect {
+		mux {
+			pins = "gpio102";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio102";
+			drive-strength = <10>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+
+	sa8155_cfg_usb_phy_port_select: sa8155_cfg_usb_phy_port_select {
+		mux {
+			pins = "gpio38";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio38";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-pull-down;
+		};
+	};
+
+	cpu_usbhub_ctrl_rst: cpu_usbhub_ctrl_rst {
+		mux {
+			pins = "gpio113";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio113";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+};
+
+&usb0 {
+	oc-gpio = <&tlmm 81 GPIO_ACTIVE_LOW>;
+	vbus-out-gpio = <&tlmm 82 GPIO_ACTIVE_HIGH>;
+	debounce-delay-ms = <20>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usbv3_fault_detect &usbv3_power_enable>;
+
+	qcom,default-mode-host;
+
+	dwc3@a600000 {
+		usb-phy = <&usb2_phy0>, <&usb_nop_phy>;
+		maximum-speed = "high-speed";
+	};
+};
+
+&usb1 {
+	/* Excel remark (GPIO_102): mounting option only for EU/US subPCB */
+	oc-gpio = <&tlmm 102 GPIO_ACTIVE_LOW>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usbv2_fault_detect>;
+	/* NEEDS REVIEW: sheet 'USBHUB' puts CPU_USBHUB_CTRL_1V8:RST_B on GPIO_102; Database sheet assigns it to: CPU_USB20_CTRL_1V8:USB_OC_B - wiring depends on the hardware variant, confirm which applies */
+
+	/* NEEDS REVIEW: debounce-delay-ms, qcom,default-mode-host, the dwc3 child (unit address, usb-phy, maximum-speed) - only confirmed for the reference instance;
+	 * add from a real reference if this instance needs them. */
+
+	i2c18: i2c@0 {
+// UNVERIFIED [compatible-style string "qcom,i2c-qup" is not in the workbook, the verified output or your facts]: compatible = "qcom,i2c-qup";
+// UNVERIFIED [I2C address / hex value 0x0 is not in the workbook, the verified output or your facts]: reg = <0x0 0x0 0x0 0x0>; /* NEEDS REVIEW: missing reg property */
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		hub@2d {
+			compatible = "microchip,usb2514";
+			reg = <0x2d>; /* source: FACT 2 */
+		};
+	}
+};

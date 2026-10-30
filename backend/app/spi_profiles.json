@@ -1,0 +1,586 @@
+{
+ "_doc": "SPI pin selection patterns and verified SoC pin tables. A pin is SPI only when the workbook's SELECTED function says so; the 'interfaces' capability list is never used. Function names/mux values were read from the Linux pinctrl driver of the named SoC; a SoC without an entry gets the workbook's QUP text as function name and a NEEDS REVIEW.",
+ "selected": [
+  {
+   "name": "qup",
+   "pattern": "(?<![a-z])spi[-_ ]?(?P<mode>m|s)[a-z]*[-_ ]*(?P<inst>qup(?P<n>\\d+)(?:_?se(?P<se>\\d+))?)",
+   "qup": true
+  },
+  {
+   "name": "gpsb",
+   "pattern": "(?<![a-z])(?P<inst>gpsb[_ ]?(?P<n>\\d+))",
+   "qup": false
+  }
+ ],
+ "roles": {
+  "miso": "miso|(?<![a-z])so(?![a-z])",
+  "mosi": "mosi|(?<![a-z])si(?![a-z])",
+  "sclk": "sclk|mclk|(?<![a-z])clk(?![a-z])|(?<![a-z])sck(?![a-z])",
+  "cs": "(?<![a-z])cs(?:[_ ]?n|[_ ]?b)?(?:[_ ]?\\d+)?(?![a-z])|cs[_ ]?\\d+"
+ },
+ "socs": {
+  "SA8155P": {
+   "aliases": [
+    "SA8155",
+    "SM8150",
+    "SA8155SIP"
+   ],
+   "controller": "spi{n}",
+   "source": "Linux v6.6 drivers/pinctrl/qcom/pinctrl-sm8150.c and arch/arm64/boot/dts/qcom/sm8150.dtsi",
+   "pins": {
+    "0": [
+     {
+      "function": "qup0",
+      "mux": 1
+     }
+    ],
+    "1": [
+     {
+      "function": "qup0",
+      "mux": 1
+     }
+    ],
+    "2": [
+     {
+      "function": "qup0",
+      "mux": 1
+     }
+    ],
+    "3": [
+     {
+      "function": "qup0",
+      "mux": 1
+     }
+    ],
+    "4": [
+     {
+      "function": "qup6",
+      "mux": 1
+     }
+    ],
+    "5": [
+     {
+      "function": "qup6",
+      "mux": 1
+     }
+    ],
+    "6": [
+     {
+      "function": "qup6",
+      "mux": 1
+     },
+     {
+      "function": "qup_l6",
+      "mux": 3
+     }
+    ],
+    "7": [
+     {
+      "function": "qup6",
+      "mux": 1
+     },
+     {
+      "function": "qup_l5",
+      "mux": 3
+     }
+    ],
+    "9": [
+     {
+      "function": "qup10",
+      "mux": 3
+     }
+    ],
+    "10": [
+     {
+      "function": "qup10",
+      "mux": 4
+     }
+    ],
+    "11": [
+     {
+      "function": "qup10",
+      "mux": 1
+     }
+    ],
+    "12": [
+     {
+      "function": "qup10",
+      "mux": 1
+     }
+    ],
+    "23": [
+     {
+      "function": "qup18",
+      "mux": 2
+     }
+    ],
+    "24": [
+     {
+      "function": "qup18",
+      "mux": 3
+     }
+    ],
+    "25": [
+     {
+      "function": "qup18",
+      "mux": 3
+     }
+    ],
+    "26": [
+     {
+      "function": "qup18",
+      "mux": 2
+     }
+    ],
+    "27": [
+     {
+      "function": "qup15",
+      "mux": 1
+     }
+    ],
+    "28": [
+     {
+      "function": "qup15",
+      "mux": 1
+     }
+    ],
+    "29": [
+     {
+      "function": "qup15",
+      "mux": 1
+     }
+    ],
+    "30": [
+     {
+      "function": "qup15",
+      "mux": 1
+     }
+    ],
+    "33": [
+     {
+      "function": "qup_l5",
+      "mux": 2
+     }
+    ],
+    "34": [
+     {
+      "function": "qup_l6",
+      "mux": 2
+     }
+    ],
+    "37": [
+     {
+      "function": "qup_l4",
+      "mux": 1
+     }
+    ],
+    "39": [
+     {
+      "function": "qup9",
+      "mux": 1
+     }
+    ],
+    "40": [
+     {
+      "function": "qup9",
+      "mux": 1
+     }
+    ],
+    "41": [
+     {
+      "function": "qup9",
+      "mux": 1
+     }
+    ],
+    "42": [
+     {
+      "function": "qup9",
+      "mux": 1
+     }
+    ],
+    "43": [
+     {
+      "function": "qup13",
+      "mux": 1
+     }
+    ],
+    "44": [
+     {
+      "function": "qup13",
+      "mux": 1
+     }
+    ],
+    "45": [
+     {
+      "function": "qup13",
+      "mux": 1
+     }
+    ],
+    "46": [
+     {
+      "function": "qup13",
+      "mux": 1
+     }
+    ],
+    "47": [
+     {
+      "function": "qup14",
+      "mux": 1
+     }
+    ],
+    "48": [
+     {
+      "function": "qup14",
+      "mux": 1
+     }
+    ],
+    "49": [
+     {
+      "function": "qup14",
+      "mux": 1
+     }
+    ],
+    "50": [
+     {
+      "function": "qup14",
+      "mux": 1
+     }
+    ],
+    "51": [
+     {
+      "function": "qup4",
+      "mux": 1
+     }
+    ],
+    "52": [
+     {
+      "function": "qup4",
+      "mux": 1
+     }
+    ],
+    "53": [
+     {
+      "function": "qup4",
+      "mux": 1
+     }
+    ],
+    "54": [
+     {
+      "function": "qup4",
+      "mux": 1
+     }
+    ],
+    "55": [
+     {
+      "function": "qup17",
+      "mux": 1
+     },
+     {
+      "function": "qup19",
+      "mux": 2
+     }
+    ],
+    "56": [
+     {
+      "function": "qup17",
+      "mux": 1
+     },
+     {
+      "function": "qup19",
+      "mux": 2
+     }
+    ],
+    "57": [
+     {
+      "function": "qup17",
+      "mux": 1
+     },
+     {
+      "function": "qup19",
+      "mux": 2
+     }
+    ],
+    "58": [
+     {
+      "function": "qup17",
+      "mux": 1
+     },
+     {
+      "function": "qup19",
+      "mux": 2
+     }
+    ],
+    "59": [
+     {
+      "function": "qup_l4",
+      "mux": 2
+     }
+    ],
+    "81": [
+     {
+      "function": "qup_l4",
+      "mux": 6
+     }
+    ],
+    "82": [
+     {
+      "function": "qup_l5",
+      "mux": 6
+     }
+    ],
+    "83": [
+     {
+      "function": "qup12",
+      "mux": 1
+     },
+     {
+      "function": "qup16",
+      "mux": 2
+     }
+    ],
+    "84": [
+     {
+      "function": "qup12",
+      "mux": 1
+     },
+     {
+      "function": "qup16",
+      "mux": 2
+     }
+    ],
+    "85": [
+     {
+      "function": "qup12",
+      "mux": 1
+     },
+     {
+      "function": "qup16",
+      "mux": 2
+     }
+    ],
+    "86": [
+     {
+      "function": "qup12",
+      "mux": 1
+     },
+     {
+      "function": "qup16",
+      "mux": 2
+     }
+    ],
+    "88": [
+     {
+      "function": "qup8",
+      "mux": 2
+     }
+    ],
+    "89": [
+     {
+      "function": "qup8",
+      "mux": 2
+     }
+    ],
+    "90": [
+     {
+      "function": "qup8",
+      "mux": 2
+     }
+    ],
+    "91": [
+     {
+      "function": "qup8",
+      "mux": 2
+     }
+    ],
+    "92": [
+     {
+      "function": "qup11",
+      "mux": 2
+     }
+    ],
+    "93": [
+     {
+      "function": "qup11",
+      "mux": 2
+     }
+    ],
+    "94": [
+     {
+      "function": "qup11",
+      "mux": 2
+     }
+    ],
+    "95": [
+     {
+      "function": "qup11",
+      "mux": 2
+     },
+     {
+      "function": "qup_l4",
+      "mux": 4
+     }
+    ],
+    "96": [
+     {
+      "function": "qup_l5",
+      "mux": 2
+     }
+    ],
+    "97": [
+     {
+      "function": "qup_l6",
+      "mux": 3
+     }
+    ],
+    "98": [
+     {
+      "function": "qup7",
+      "mux": 1
+     }
+    ],
+    "99": [
+     {
+      "function": "qup7",
+      "mux": 1
+     }
+    ],
+    "100": [
+     {
+      "function": "qup7",
+      "mux": 1
+     }
+    ],
+    "101": [
+     {
+      "function": "qup7",
+      "mux": 1
+     }
+    ],
+    "114": [
+     {
+      "function": "qup1",
+      "mux": 1
+     }
+    ],
+    "115": [
+     {
+      "function": "qup1",
+      "mux": 1
+     }
+    ],
+    "116": [
+     {
+      "function": "qup1",
+      "mux": 1
+     }
+    ],
+    "117": [
+     {
+      "function": "qup1",
+      "mux": 1
+     }
+    ],
+    "119": [
+     {
+      "function": "qup5",
+      "mux": 1
+     }
+    ],
+    "120": [
+     {
+      "function": "qup5",
+      "mux": 1
+     }
+    ],
+    "121": [
+     {
+      "function": "qup5",
+      "mux": 1
+     }
+    ],
+    "122": [
+     {
+      "function": "qup5",
+      "mux": 1
+     }
+    ],
+    "123": [
+     {
+      "function": "qup_l6",
+      "mux": 2
+     }
+    ],
+    "126": [
+     {
+      "function": "qup2",
+      "mux": 2
+     }
+    ],
+    "127": [
+     {
+      "function": "qup2",
+      "mux": 2
+     }
+    ],
+    "128": [
+     {
+      "function": "qup2",
+      "mux": 2
+     }
+    ],
+    "129": [
+     {
+      "function": "qup2",
+      "mux": 2
+     }
+    ],
+    "144": [
+     {
+      "function": "qup3",
+      "mux": 2
+     }
+    ],
+    "145": [
+     {
+      "function": "qup3",
+      "mux": 2
+     }
+    ],
+    "146": [
+     {
+      "function": "qup3",
+      "mux": 2
+     }
+    ],
+    "147": [
+     {
+      "function": "qup3",
+      "mux": 2
+     }
+    ]
+   },
+   "wrappers": {
+    "0": "qupv3_id_0",
+    "1": "qupv3_id_0",
+    "2": "qupv3_id_0",
+    "3": "qupv3_id_0",
+    "4": "qupv3_id_0",
+    "5": "qupv3_id_0",
+    "6": "qupv3_id_0",
+    "7": "qupv3_id_0",
+    "8": "qupv3_id_1",
+    "9": "qupv3_id_1",
+    "10": "qupv3_id_1",
+    "11": "qupv3_id_1",
+    "12": "qupv3_id_1",
+    "16": "qupv3_id_1",
+    "17": "qupv3_id_2",
+    "18": "qupv3_id_2",
+    "19": "qupv3_id_2",
+    "13": "qupv3_id_2",
+    "14": "qupv3_id_2",
+    "15": "qupv3_id_2"
+   }
+  }
+ }
+}

@@ -1,0 +1,77 @@
+
+
+&tlmm {
+	usbv3_fault_detect: usbv3_fault_detect {
+		mux {
+			pins = "gpio81";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio81";
+			drive-strength = <10>;
+			input-enable;
+			bias-disable;
+		};
+	};
+	usbv3_power_enable: usbv3_power_enable {
+		mux {
+			pins = "gpio82";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio82";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+	usbv2_fault_detect: usbv2_fault_detect {
+		mux {
+			pins = "gpio102";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio102";
+			drive-strength = <10>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+	sa8155_cfg_usb_phy_port_select: sa8155_cfg_usb_phy_port_select {
+		mux {
+			pins = "gpio38";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio38";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-pull-down;
+		};
+	};
+	cpu_usbhub_ctrl_rst: cpu_usbhub_ctrl_rst {
+		mux {
+			pins = "gpio113";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio113";
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+	cpu_usbhub_ctrl_usb_hub_i2c_en: cpu_usbhub_ctrl_usb_hub_i2c_en {
+		mux {
+			pins = "gpio92";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio92";
+			/* decided: SHARED PIN - one physical GPIO on 2 nets (CPU_USBHUB_CTRL_1V8:USB_HUB_I2C_EN; CPU_USB20_CTRL_1V8:USB_PWR_EN). The pin is owned by the hub line "CPU_USBHUB_CTRL_1V8:USB_HUB_I2C_EN" (the only net that names the hub); the other net(s) depend on it - confirm on the schematic */
+			drive-strength = <10>;
+			/* NEEDS REVIEW: output pin - add output-high or output-low per hardware design (level is not derivable from Excel) */
+			bias-disable;
+		};
+	};
+};

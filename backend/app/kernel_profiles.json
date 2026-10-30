@@ -1,0 +1,17 @@
+{
+  "_comment": "Data for --kernel (Linux kernel version -> pin-state format). Edit freely; no code change needed. 'raw_base' is where reference files are fetched from (env KERNEL_RAW_BASE overrides it, e.g. an internal git mirror; the tag is appended as <raw_base>/<tag>/<path>). 'soc_reference' lists, per SoC, files in the kernel tree that contain pin-state nodes, tried in order. 'table' is the OFFLINE fallback: format rules MEASURED by reading the files named in 'evidence'; a version outside every measured range is not guessed.",
+  "raw_base": "https://raw.githubusercontent.com/torvalds/linux",
+  "soc_reference": {
+    "SA8155P": ["arch/arm64/boot/dts/qcom/sa8155p-adp.dts", "arch/arm64/boot/dts/qcom/sm8150-mtp.dts"],
+    "SM8150": ["arch/arm64/boot/dts/qcom/sm8150-mtp.dts", "arch/arm64/boot/dts/qcom/sa8155p-adp.dts"]
+  },
+  "table": {
+    "measured_on": "SA8155P (arch/arm64/boot/dts/qcom/sa8155p-adp.dts)",
+    "rules": [
+      {"min": "5.15", "max": "6.1", "layout": "mux_config", "name_style": "same",
+       "evidence": "v5.15 and v6.1: 'usb2phy_ac_en1_default: usb2phy_ac_en1_default { mux { pins; function; bias; drive-strength; }; };'"},
+      {"min": "6.2", "max": "6.12", "layout": "flat", "name_style": "hyphen_state",
+       "evidence": "v6.2, v6.3, v6.4, v6.5, v6.6, v6.12: 'usb2phy_ac_en1_default: usb2phy-ac-en1-default-state { pins; function; bias; drive-strength; };'"}
+    ]
+  }
+}

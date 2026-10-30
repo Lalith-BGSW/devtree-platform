@@ -1,0 +1,20 @@
+/*
+ * Template A (fabricated): 4-space indent, flat '-state' nodes, no mux/config split.
+ * Only this FORMAT should be copied into the output - none of the pins below may appear in it.
+ */
+
+&tlmm {
+    sample_alpha_default: sample-alpha-default-state {
+        pins = "gpio90";
+        function = "gpio";
+        drive-strength = <2>;
+        bias-disable;
+    };
+
+    sample_beta_default: sample-beta-default-state {
+        pins = "gpio91";
+        function = "gpio";
+        drive-strength = <8>;
+        bias-pull-up;
+    };
+};

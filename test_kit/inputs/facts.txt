@@ -1,0 +1,2 @@
+gpio11 boots output-low per the schematic
+gpio14 boots output-low per the schematic

@@ -1,0 +1,108 @@
+{
+ "_doc": "Ethernet pin families and the verified SoC pin tables. A pin is Ethernet only when the workbook's SELECTED function says so; the 'interfaces' capability list is never used. Function names/mux values below were read from the Linux pinctrl driver of the named SoC; a SoC without an entry gets the workbook's function text and a NEEDS REVIEW.",
+ "families": {
+  "rgmii": {
+   "label": "RGMII",
+   "pattern": "rg[mb]{1,2}ii",
+   "tlmm": true
+  },
+  "rmii": {
+   "label": "RMII / MII",
+   "pattern": "(?<![a-z])r?mii(?![a-z])",
+   "tlmm": true
+  },
+  "mdio": {
+   "label": "MDIO / MDC",
+   "pattern": "(?<![a-z])(mdio|mdc)(?![a-z])",
+   "tlmm": true
+  },
+  "emac": {
+   "label": "EMAC / Ethernet",
+   "pattern": "emac|ethernet|(?<![a-z])eth(?![a-z])|phy[_ ]?int|(?<![a-z0-9])(ptp|pps)(?![a-z])",
+   "tlmm": true
+  },
+  "sgmii": {
+   "label": "SGMII",
+   "pattern": "sgmii|serdes",
+   "tlmm": false,
+   "note": "SGMII runs on a dedicated SerDes lane pair, not on TLMM pins: there is no pinctrl state to generate. Its settings (phy-mode, PHY address) are in the controller node."
+  }
+ },
+ "socs": {
+  "SA8155P": {
+   "aliases": [
+    "SA8155",
+    "SM8150",
+    "SA8155SIP"
+   ],
+   "controller": "ethernet",
+   "source": "Linux v6.6 drivers/pinctrl/qcom/pinctrl-sm8150.c and arch/arm64/boot/dts/qcom/sa8155p-adp.dts",
+   "pins": {
+    "4": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "5": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "6": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "7": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "59": {
+     "function": "rgmii",
+     "mux": 1
+    },
+    "114": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "115": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "116": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "117": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "118": {
+     "function": "rgmii",
+     "mux": 1
+    },
+    "119": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "120": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "121": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "122": {
+     "function": "rgmii",
+     "mux": 2
+    },
+    "124": {
+     "function": "emac_phy",
+     "mux": 1
+    },
+    "81": {
+     "function": "emac_pps",
+     "mux": 8
+    }
+   }
+  }
+ }
+}

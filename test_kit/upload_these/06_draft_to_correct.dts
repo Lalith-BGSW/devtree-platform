@@ -1,0 +1,29 @@
+/* A colleague's draft with deliberate mistakes against the demo workbook. */
+
+&tlmm {
+	usbv2_0_power_enable: usbv2_0_power_enable {
+		mux {
+			pins = "gpio11";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio11";
+			drive-strength = <16>;
+			output-high;
+			bias-pull-up;
+		};
+	};
+
+	usbv2_0_fault_detect: usbv2_0_fault_detect {
+		mux {
+			pins = "gpio10";
+			function = "gpio";
+		};
+		config {
+			pins = "gpio10";
+			drive-strength = <4>;
+			input-enable;
+			bias-pull-up;
+		};
+	};
+};

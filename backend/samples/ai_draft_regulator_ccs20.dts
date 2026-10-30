@@ -1,0 +1,95 @@
+&usb0 {
+        status = "okay";
+        vbus_dwc3-supply = <&usb0_vbus_regulator>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&usbv2_0_power_enable>;
+        qcom,default-mode-host;
+};
+
+&usb1 {
+        status = "okay";
+        vbus_dwc3-supply = <&usb1_vbus_regulator>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&usbv2_1_power_enable>;
+        qcom,default-mode-host;
+};
+
+&tlmm {
+
+        usbv2_0_power_enable: usbv2_0_power_enable {
+
+                mux {
+                        pins = "gpio82";
+                        function = "gpio";
+                };
+
+                config {
+                        pins = "gpio82";
+                        drive-strength = <10>;
+                        output-low;
+                        bias-disable;
+                };
+        };
+
+        usbv2_1_power_enable: usbv2_1_power_enable {
+
+                mux {
+                        pins = "gpio92";
+                        function = "gpio";
+                };
+
+                config {
+                        pins = "gpio92";
+                        drive-strength = <10>;
+                        output-low;
+                        bias-disable;
+                };
+        };
+
+        usb_hub_reset: usb_hub_reset {
+
+                mux {
+                        pins = "gpio113";
+                        function = "gpio";
+                };
+
+                config {
+                        pins = "gpio113";
+                        drive-strength = <10>;
+                        output-low;
+                        bias-disable;
+                };
+        };
+
+        usb_phy_port_select: usb_phy_port_select {
+
+                mux {
+                        pins = "gpio38";
+                        function = "gpio";
+                };
+
+                config {
+                        pins = "gpio38";
+                        drive-strength = <10>;
+                        output-low;
+                        bias-pull-down;
+                };
+        };
+};
+
+usb0_vbus_regulator: usb0_vbus_regulator {
+        compatible = "regulator-fixed";
+        regulator-name = "usb0_vbus_regulator";
+        regulator-min-microvolt = <5000000>;
+        regulator-max-microvolt = <5000000>;
+
+};
+
+usb1_vbus_regulator: usb1_vbus_regulator {
+        compatible = "regulator-fixed";
+        regulator-name = "usb1_vbus_regulator";
+        regulator-min-microvolt = <5000000>;
+        regulator-max-microvolt = <5000000>;
+        enable-active-high;
+        gpio = <&tlmm 92 0>; /* GPIO_ACTIVE_HIGH - Controls USB20 PWR / HUB I2C EN */
+};
